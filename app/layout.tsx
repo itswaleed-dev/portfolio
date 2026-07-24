@@ -14,19 +14,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784364353/wa_vfl6x5.png",
+        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784364353/wa_vfl6x5.png",
+        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784364353/wa_vfl6x5.png",
+        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
         type: "image/svg+xml",
       },
     ],
-    apple:"https://res.cloudinary.com/do3bdamxv/image/upload/v1784364353/wa_vfl6x5.png",
+    apple:"https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
   },
 }
 

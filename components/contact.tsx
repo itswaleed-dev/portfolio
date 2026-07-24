@@ -55,7 +55,7 @@ export function Contact() {
             <p className="text-muted-foreground text-lg">Have a project in mind? Let's work together</p>
           </div>
 
-          <div className="grid grid-cols-3 lg:grid-cols-3 gap-8">
+          <div className="grid  sm:grid-cols-1 lg:grid-cols-3 gap-8">
               <Card>
                 <CardContent className="p-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10 text-primary">

@@ -1,4 +1,4 @@
-import { Github, Mail } from "lucide-react"
+import { Github, Mail,Linkedin } from "lucide-react"
 
 export function Footer() {
   return (
@@ -16,13 +16,15 @@ export function Footer() {
               <Github className="h-5 w-5" />
             </a>
             <a
-              href="https://www.fiverr.com/users/waleeddevexpert/seller_dashboard"
+                href="https://www.linkedin.com/in/waleed-ahmad-192598405/"
+
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:text-primary transition-colors"
               aria-label="Fiverr"
             >
-                             <img  className="h-6 w-5"  src="https://companieslogo.com/img/orig/FVRR.D-1ec02e6b.png?t=1720244491" />
+              <Linkedin className="h-5 w-5" />
+
             </a>
             <a
               href="mailto:waleedcoderz@gmail.com"

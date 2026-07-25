@@ -24,13 +24,15 @@ const projects = [
     demo: "https://myweather-wa.vercel.app/",
   },
   {
-    title: "Real-Time Chat Application",
-    description: "WebSocket-based chat application with private messaging, group chats, and file sharing capabilities.",
-    tags: ["Next.js", "Socket.io", "Node.js", "MongoDB"],
-    image: "/modern-chat-application.png",
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "Blink Web App like tiktok",
+    description:
+      "Using Next.js and vercel base deployment ",
+    tags: [" Next", "vercel","Tailwind CSS", "mongoDB", "React Hook", "Api Integration"],
+    image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784980189/Screenshot_2026-07-25_164720_lqluxx.png",
+      github: "https://github.com/waleedcoder786/tiktok-blink",
+    demo: "https://blink-wa.vercel.app/",
   },
+  
   {
     title: "Task Management System",
     description: "Collaborative project management tool with kanban boards, team collaboration, and progress tracking.",

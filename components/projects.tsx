@@ -11,7 +11,7 @@ const projects = [
       "A full-stack MERN e-commerce application with payment integration, user authentication .",
     tags: ["Next", "Tailwind CSS", "MongoDB", "React Hook"],
     image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784363602/Screenshot_2026-07-18_133140_eashig.png",
-    github: "https://github.com/waleedcoder786/myStore-ecommerce",
+    github: "https://github.com/itswaleed-dev/myStore-ecommerce",
     demo: "https://mystore-wa.vercel.app/",
   },
   {
@@ -20,7 +20,7 @@ const projects = [
       "Using Next.js and WeatherApi ",
     tags: [" Next", "Api Integration","Tailwind CSS", "Vercel "],
     image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784368366/Screenshot_2026-07-18_145153_gbplkm.png",
-      github: "https://github.com/waleedcoder786/myweather",
+      github: "https://github.com/itswaleed-dev/myweather",
     demo: "https://myweather-wa.vercel.app/",
   },
   {
@@ -29,17 +29,17 @@ const projects = [
       "Using Next.js and vercel base deployment ",
     tags: [" Next", "vercel","Tailwind CSS", "mongoDB", "React Hook", "Api Integration"],
     image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784980189/Screenshot_2026-07-25_164720_lqluxx.png",
-      github: "https://github.com/waleedcoder786/tiktok-blink",
+      github: "https://github.com/itswaleed-dev/tiktok-blink",
     demo: "https://blink-wa.vercel.app/",
   },
   
   {
-    title: "Task Management System",
-    description: "Collaborative project management tool with kanban boards, team collaboration, and progress tracking.",
-    tags: ["React", "Tailwind CSS", "Express", "SQL"],
-    image: "/project-management-dashboard.png",
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "Inventory Management System",
+    description: "Inventory management system with user authentication, CRUD operations, and responsive design.",
+    tags: ["Next.js", "Tailwind CSS", "MongoDb", "Hooks"],
+    image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1785740853/Screenshot_2026-08-03_120409_wxgthv.png",
+    github: "https://github.com/itswaleed-dev/shaniShop",
+    demo: "https://shani-shop.vercel.app/dashboard",
   },
 ]
 

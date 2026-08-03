@@ -7,7 +7,7 @@ export function Footer() {
         <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/waleedcoder786"
+              href="https://github.com/itswaleed-dev"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:text-primary transition-colors"

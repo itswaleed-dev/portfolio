@@ -99,7 +99,7 @@ export function Hero() {
 
             <div className="flex items-center justify-center lg:justify-start gap-4 pt-4">
               <a
-                href="https://github.com/waleedcoder786"
+                href="https://github.com/itswaleed-dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:text-primary transition-colors"

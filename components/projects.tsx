@@ -13,6 +13,14 @@ const projects = [
     image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784363602/Screenshot_2026-07-18_133140_eashig.png",
     github: "https://github.com/itswaleed-dev/myStore-ecommerce",
     demo: "https://mystore-wa.vercel.app/",
+  },{
+    title: "Paper making Web App",
+    description:
+      "Using Next.js and MongoDB for backend and vercel base deployment ",
+    tags: [" Next", "REST API ","Tailwind CSS", "Vercel"],
+    image: "https://res.cloudinary.com/do3bdamxv/image/upload/v1785742461/Screenshot_2026-08-03_123120_f25zej.png",
+      github: "https://github.com/itswaleed-dev/paperSite",
+    demo: "https://paper-site-neon.vercel.app/",
   },
   {
     title: "Weather Web App",
@@ -23,6 +31,7 @@ const projects = [
       github: "https://github.com/itswaleed-dev/myweather",
     demo: "https://myweather-wa.vercel.app/",
   },
+
   {
     title: "Blink Web App like tiktok",
     description:

@@ -161,4 +161,37 @@
   .soft-hover-lift:hover {
     transform: translateY(-0.35rem);
   }
+
+  .nav-link {
+    @apply relative text-sm text-muted-foreground transition duration-300 ease-out;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -0.3rem;
+    width: 0;
+    height: 2px;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    transition: width 0.28s ease, left 0.28s ease, transform 0.28s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover {
+    color: var(--color-foreground);
+    transform: translateY(-0.1rem);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
+  }
+
+  .nav-link:focus-visible {
+    outline: none;
+    color: var(--color-foreground);
+  }
 }

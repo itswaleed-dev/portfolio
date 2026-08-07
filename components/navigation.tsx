@@ -43,7 +43,7 @@ export function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition duration-200 hover:-translate-y-0.5"
+                className="nav-link"
               >
                 {item.label}
               </a>
@@ -70,7 +70,7 @@ export function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="nav-link"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}

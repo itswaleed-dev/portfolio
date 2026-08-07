@@ -35,10 +35,10 @@ export function Experience() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section id="experience" className="py-24 sm:py-32 bg-secondary/30">
+    <section id="experience" data-aos="fade-up" className="py-24 sm:py-32 bg-secondary/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">Work Experience</h2>
             <p className="text-muted-foreground text-lg">Professional journey in software development</p>
           </div>
@@ -51,6 +51,8 @@ export function Experience() {
               {experiences.map((exp, index) => (
                 <div
                   key={index}
+                  data-aos="fade-up"
+                  data-aos-delay={`${index * 100}`}
                   className="relative pl-14 group"
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}

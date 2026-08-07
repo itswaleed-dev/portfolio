@@ -27,6 +27,8 @@ export function Navigation() {
 
   return (
     <nav
+      data-aos="fade-down"
+      data-aos-duration="700"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,7 +43,7 @@ export function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition duration-200 hover:-translate-y-0.5"
               >
                 {item.label}
               </a>

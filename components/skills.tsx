@@ -65,9 +65,9 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 px-4">
+    <section id="skills" data-aos="fade-up" className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-16">
+        <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Skills & Technologies</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A comprehensive toolkit for building modern web applications
@@ -78,6 +78,8 @@ export function Skills() {
           {skillCategories.map((category, idx) => (
             <div
               key={idx}
+              data-aos="fade-up"
+              data-aos-delay={`${idx * 100}`}
               className="group relative bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>

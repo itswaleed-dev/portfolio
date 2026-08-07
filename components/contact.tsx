@@ -47,16 +47,16 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" data-aos="fade-up" className="py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
+          <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance ">Get In Touch</h2>
             <p className="text-muted-foreground text-lg">Have a project in mind? Let's work together</p>
           </div>
 
           <div className="grid  sm:grid-cols-1 lg:grid-cols-3 gap-8">
-              <Card>
+              <Card data-aos="fade-up" data-aos-delay="100">
                 <CardContent className="p-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10 text-primary">
                     <Mail className="h-6 w-6" />
@@ -73,7 +73,7 @@ export function Contact() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card data-aos="fade-up" data-aos-delay="150">
                 <CardContent className="p-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10 text-primary">
                     <Phone className="h-6 w-6" />
@@ -90,7 +90,7 @@ export function Contact() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card data-aos="fade-up" data-aos-delay="200">
                 <CardContent className="p-6 flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10 text-primary">
                     <MapPin className="h-6 w-6" />

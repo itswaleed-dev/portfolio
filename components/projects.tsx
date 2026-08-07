@@ -54,10 +54,10 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-24 sm:py-32">
+    <section id="projects" data-aos="fade-up" className="py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl  font-bold mb-4 text-balance">Featured Projects</h2>
             <p className="text-muted-foreground text-lg">Recent work showcasing my development expertise</p>
           </div>
@@ -66,7 +66,9 @@ export function Projects() {
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="group overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+                data-aos="fade-up"
+                data-aos-delay={`${index * 80}`}
+                className="group overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 animate-soft-fade-up"
               >
                 <div className="relative overflow-hidden">
                   <img

@@ -1,80 +1,16 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github,  Linkedin ,Mail } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
 
 export function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
-    const particles: Array<{
-      x: number
-      y: number
-      vx: number
-      vy: number
-      size: number
-    }> = []
-
-    for (let i = 0; i < 50; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
-      })
-    }
-
-    function animate() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      particles.forEach((particle) => {
-        particle.x += particle.vx
-        particle.y += particle.vy
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
-
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = "rgba(100, 200, 255, 0.3)"
-        ctx.fill()
-      })
-
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
   return (
-    <section id="home" className="relative px-10 min-h-screen flex items-center justify-center overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
-
+    <section id="home" data-aos="fade-up" className="relative px-10 min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Left Side - Content */}
-          <div className="space-y-8 animate-fade-up text-center lg:text-left">
+          <div data-aos="fade-right" data-aos-delay="100" className="space-y-8 text-center lg:text-left animate-soft-fade-up">
             
 
             <h1 className="text-5xl mt-20 sm:text-6xl lg:text-7xl font-bold text-balance">
@@ -89,10 +25,10 @@ export function Hero() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-              <Button size="lg" asChild>
+              <Button size="lg" asChild className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/20">
                 <a href="#contact">Get In Touch</a>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10">
                 <a href="#projects">View Projects</a>
               </Button>
             </div>
@@ -127,8 +63,8 @@ export function Hero() {
           </div>
 
           {/* Right Side - Image */}
-          <div className="flex justify-center lg:justify-end animate-fade-up">
-            <div className="relative w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px]">
+          <div data-aos="fade-left" data-aos-delay="200" className="flex justify-center lg:justify-end">
+            <div data-aos="zoom-in" data-aos-delay="250" className="relative w-full max-w-[250px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[400px] transition-transform duration-700 ease-out hover:-translate-y-1 hover:scale-[1.01] animate-soft-float">
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"></div>
               <div className="relative rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl aspect-square">
                 <Image
@@ -136,7 +72,7 @@ export function Hero() {
                   alt="Waleed Ahmad"
                   width={400}
                   height={400}
-                  className="w-full h-[125%]  object-fill "
+                  className="w-full h-[125%] object-fill"
                   priority
                   unoptimized
                 />

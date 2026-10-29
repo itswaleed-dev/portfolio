@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowDown, Eye, FileDown, Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
 import type { PortfolioContent } from "@/lib/portfolio-content"
 import { TypewriterText } from "@/components/typewriter-text"
@@ -33,6 +33,12 @@ export function Hero({ content }: { content: PortfolioContent["hero"] }) {
               </Button>
               <Button size="lg" variant="outline" asChild className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10">
                 <a href="#projects">View Projects</a>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10">
+                <a href="/api/cv" target="_blank" rel="noopener noreferrer">
+                  <Eye className="mr-2 h-4 w-4" />
+                  View CV
+                </a>
               </Button>
             </div>
 

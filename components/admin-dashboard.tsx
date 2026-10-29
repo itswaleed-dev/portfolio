@@ -54,7 +54,7 @@ type VisitStats = {
   }[]
 }
 
-const sections: { id: keyof PortfolioContent | "overview" | "messages" | "visits"; label: string }[] = [
+const sections: { id: keyof PortfolioContent | "overview" | "messages" | "visits" | "cv"; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
@@ -63,9 +63,12 @@ const sections: { id: keyof PortfolioContent | "overview" | "messages" | "visits
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact details" },
   { id: "footer", label: "Footer" },
+  { id: "cv", label: "CV / Resume" },
   { id: "visits", label: "Portfolio visits" },
   { id: "messages", label: "Messages" },
 ]
+
+type AdminSection = keyof PortfolioContent | "overview" | "messages" | "visits" | "cv"
 
 function labelFor(key: string) {
   return key
@@ -287,7 +290,7 @@ function EditorField({
 
 export function AdminDashboard() {
   const [user, setUser] = useState<{ email: string } | null>(null)
-  const [activeSection, setActiveSection] = useState<keyof PortfolioContent | "overview" | "messages" | "visits">("overview")
+  const [activeSection, setActiveSection] = useState<AdminSection>("overview")
   const [content, setContent] = useState<PortfolioContent>(defaultPortfolioContent)
   const [messages, setMessages] = useState<ContactMessage[]>([])
   const [visits, setVisits] = useState<VisitStats | null>(null)
@@ -297,6 +300,8 @@ export function AdminDashboard() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
+  const [isUploadingCv, setIsUploadingCv] = useState(false)
+  const [cvFile, setCvFile] = useState<File | null>(null)
   const [isConfigured, setIsConfigured] = useState(true)
 
   const isAdmin = user !== null
@@ -455,6 +460,33 @@ export function AdminDashboard() {
     }
   }
 
+  const handleCvUpload = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!cvFile) {
+      showStatus("Choose a PDF file first.", true)
+      return
+    }
+
+    setIsUploadingCv(true)
+    setStatus("")
+    try {
+      const formData = new FormData()
+      formData.set("file", cvFile)
+      const response = await fetch("/api/admin/cv", {
+        method: "POST",
+        body: formData,
+      })
+      const result: { error?: string } = await response.json()
+      if (!response.ok) throw new Error(result.error || "CV could not be uploaded.")
+      setCvFile(null)
+      showStatus("CV updated. The public preview and download now use this file.")
+    } catch (error) {
+      showStatus(error instanceof Error ? error.message : "CV could not be uploaded.", true)
+    } finally {
+      setIsUploadingCv(false)
+    }
+  }
+
   const updateMessage = async (message: ContactMessage, nextRead: boolean) => {
     try {
       const response = await fetch(`/api/admin/messages/${message.id}`, {
@@ -558,6 +590,7 @@ export function AdminDashboard() {
     projects: FileText,
     contact: Mail,
     footer: FileText,
+    cv: FileText,
     visits: Eye,
     messages: Inbox,
   }
@@ -791,6 +824,44 @@ export function AdminDashboard() {
               </CardContent>
             </Card>
             {status && <p role="status" className={isError ? "text-sm text-destructive" : "text-sm text-emerald-500"}>{status}</p>}
+          </section>
+        ) : activeSection === "cv" ? (
+          <section className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Update your CV</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  Upload a PDF up to 10 MB. The new CV is saved for the public preview and download.
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <div className="flex flex-wrap gap-3">
+                  <Button variant="outline" asChild>
+                    <a href="/api/cv" target="_blank" rel="noopener noreferrer"><Eye /> Preview current CV</a>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <a href="/api/cv?download=1" download="Waleed-Ahmad-CV.pdf"><FileText /> Download current CV</a>
+                  </Button>
+                </div>
+                <form onSubmit={handleCvUpload} className="space-y-4">
+                  <label className="block space-y-2 text-sm font-medium">
+                    <span>Choose replacement PDF</span>
+                    <Input
+                      type="file"
+                      accept="application/pdf,.pdf"
+                      onChange={(event) => setCvFile(event.target.files?.[0] ?? null)}
+                    />
+                  </label>
+                  {cvFile && <p className="text-sm text-muted-foreground">{cvFile.name}</p>}
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Button type="submit" disabled={isUploadingCv || !cvFile}>
+                      {isUploadingCv ? "Uploading..." : <><FileText /> Replace CV</>}
+                    </Button>
+                    {status && <p role="status" aria-live="polite" className={isError ? "text-sm text-destructive" : "text-sm text-emerald-500"}>{status}</p>}
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
           </section>
         ) : activeSection === "messages" ? (
           <section className="space-y-4">

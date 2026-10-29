@@ -42,6 +42,10 @@ Open `/admin` and sign in with `ADMIN_EMAIL` and `ADMIN_PASSWORD`. The admin
 session is held in a signed, HTTP-only cookie and expires after 12 hours.
 Portfolio sections can be edited and saved from the dashboard. The Messages
 tab lists contact form submissions; messages can be marked read or deleted.
+Use the CV / Resume tab to replace the public CV with a PDF up to 10 MB. Visitors
+can preview or download the current CV from the home page. Uploaded CVs are
+stored in the `portfolio_cv` MongoDB collection; before the first upload, the
+site uses `public/cv.pdf`.
 The Portfolio visits tab shows unique browsers recorded per day, total visits,
 and visit email notification status. A random, HTTP-only browser cookie is used
 to count each browser once per day; IP addresses and personal visitor details

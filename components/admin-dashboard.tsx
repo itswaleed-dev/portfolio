@@ -47,7 +47,11 @@ type ContactMessage = {
 type VisitStats = {
   total: number
   today: number
+  matchingCount: number
+  page: number
+  pageSize: number
   visits: {
+    id: string
     visit_date: string
     created_at: string
     notification_status: "sent" | "failed" | "not_configured"
@@ -294,6 +298,8 @@ export function AdminDashboard() {
   const [content, setContent] = useState<PortfolioContent>(defaultPortfolioContent)
   const [messages, setMessages] = useState<ContactMessage[]>([])
   const [visits, setVisits] = useState<VisitStats | null>(null)
+  const [visitSearch, setVisitSearch] = useState("")
+  const [appliedVisitSearch, setAppliedVisitSearch] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [status, setStatus] = useState("")
@@ -376,21 +382,49 @@ export function AdminDashboard() {
     }
   }, [isAdmin])
 
-  const loadVisits = useCallback(async () => {
+  const loadVisits = useCallback(async (page = 1, search = "") => {
     if (!isAdmin) return
     try {
-      const response = await fetch("/api/admin/visits")
-      const result: { error?: string; total?: number; today?: number; visits?: VisitStats["visits"] } = await response.json()
+      const params = new URLSearchParams({ page: String(page), search })
+      const response = await fetch(`/api/admin/visits?${params}`)
+      const result: {
+        error?: string
+        total?: number
+        today?: number
+        matchingCount?: number
+        page?: number
+        pageSize?: number
+        visits?: VisitStats["visits"]
+      } = await response.json()
       if (!response.ok) throw new Error(result.error || "Could not load portfolio visits.")
       setVisits({
         total: result.total ?? 0,
         today: result.today ?? 0,
+        matchingCount: result.matchingCount ?? 0,
+        page: result.page ?? page,
+        pageSize: result.pageSize ?? 10,
         visits: result.visits ?? [],
       })
     } catch (error) {
       showStatus(error instanceof Error ? error.message : "Could not load portfolio visits.", true)
     }
   }, [isAdmin])
+
+  const deleteVisit = async (id: string) => {
+    if (!window.confirm("Delete this visit record?")) return
+    try {
+      const response = await fetch(`/api/admin/visits?id=${encodeURIComponent(id)}`, { method: "DELETE" })
+      const result: { error?: string } = await response.json()
+      if (!response.ok) throw new Error(result.error || "Could not delete the visit.")
+      showStatus("Visit record deleted.")
+      const nextPage = visits && visits.visits.length === 1 && visits.page > 1
+        ? visits.page - 1
+        : visits?.page ?? 1
+      await loadVisits(nextPage, appliedVisitSearch)
+    } catch (error) {
+      showStatus(error instanceof Error ? error.message : "Could not delete the visit.", true)
+    }
+  }
 
   useEffect(() => {
     if (activeSection === "messages") void loadMessages()
@@ -790,9 +824,9 @@ export function AdminDashboard() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h2 className="text-2xl font-semibold">Portfolio visits</h2>
-                <p className="text-sm text-muted-foreground">Unique browsers recorded per day. No IP addresses or personal visitor details are stored.</p>
+                <p className="text-sm text-muted-foreground">Anonymous daily counts with visit time. No visitor email addresses, IP addresses, or personal identities are collected.</p>
               </div>
-              <Button variant="outline" onClick={() => void loadVisits()}>Refresh</Button>
+              <Button variant="outline" onClick={() => void loadVisits(1, appliedVisitSearch)}>Refresh</Button>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <Card>
@@ -805,22 +839,91 @@ export function AdminDashboard() {
               </Card>
             </div>
             <Card>
-              <CardHeader><CardTitle>Recent visits</CardTitle></CardHeader>
+              <CardHeader>
+                <CardTitle>Visit records</CardTitle>
+                <form
+                  className="flex flex-wrap gap-2"
+                  onSubmit={(event) => {
+                    event.preventDefault()
+                    const search = visitSearch.trim()
+                    setAppliedVisitSearch(search)
+                    void loadVisits(1, search)
+                  }}
+                >
+                  <Input
+                    className="max-w-xs"
+                    aria-label="Search visits by date"
+                    placeholder="Search date (YYYY-MM-DD)"
+                    value={visitSearch}
+                    maxLength={10}
+                    onChange={(event) => setVisitSearch(event.target.value)}
+                  />
+                  <Button type="submit" variant="outline">Search</Button>
+                  {visitSearch && (
+                    <Button type="button" variant="ghost" onClick={() => {
+                      setVisitSearch("")
+                      setAppliedVisitSearch("")
+                      void loadVisits(1, "")
+                    }}>
+                      Clear
+                    </Button>
+                  )}
+                </form>
+                <p className="text-sm text-muted-foreground">
+                  {visits?.matchingCount ?? 0} matching records · Notifications are sent to the admin for a new daily browser visit.
+                </p>
+              </CardHeader>
               <CardContent className="space-y-3">
                 {!visits?.visits.length ? (
-                  <p className="py-6 text-center text-sm text-muted-foreground">No portfolio visits recorded yet.</p>
+                  <p className="py-6 text-center text-sm text-muted-foreground">
+                    {visitSearch ? "No visits match that date." : "No portfolio visits recorded yet."}
+                  </p>
                 ) : visits.visits.map((visit) => (
-                  <div key={`${visit.visit_date}-${visit.created_at}`} className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0">
-                    <span className="text-sm">{new Date(visit.created_at).toLocaleString()}</span>
-                    <span className="text-xs text-muted-foreground">
-                      {visit.notification_status === "sent"
-                        ? "Email sent"
-                        : visit.notification_status === "failed"
-                          ? "Email failed"
-                          : "Email not configured"}
-                    </span>
+                  <div key={visit.id} className="flex flex-wrap items-center justify-between gap-2 border-b pb-3 last:border-0 last:pb-0">
+                    <div>
+                      <p className="text-sm">{new Date(visit.created_at).toLocaleString()}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {visit.notification_status === "sent"
+                          ? "Admin email sent"
+                          : visit.notification_status === "failed"
+                            ? "Admin email failed"
+                            : "Admin email not configured"}
+                      </p>
+                    </div>
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      aria-label={`Delete visit from ${new Date(visit.created_at).toLocaleString()}`}
+                      onClick={() => void deleteVisit(visit.id)}
+                    >
+                      <Trash2 className="text-destructive" />
+                    </Button>
                   </div>
                 ))}
+                {visits && visits.matchingCount > visits.pageSize && (
+                  <div className="flex items-center justify-between border-t pt-4">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={visits.page <= 1}
+                      onClick={() => void loadVisits(visits.page - 1, appliedVisitSearch)}
+                    >
+                      Previous
+                    </Button>
+                    <span className="text-sm text-muted-foreground">
+                      Page {visits.page} of {Math.ceil(visits.matchingCount / visits.pageSize)}
+                    </span>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={visits.page >= Math.ceil(visits.matchingCount / visits.pageSize)}
+                      onClick={() => void loadVisits(visits.page + 1, appliedVisitSearch)}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
             {status && <p role="status" className={isError ? "text-sm text-destructive" : "text-sm text-emerald-500"}>{status}</p>}

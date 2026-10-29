@@ -47,10 +47,13 @@ can preview or download the current CV from the home page. Uploaded CVs are
 stored in the `portfolio_cv` MongoDB collection; before the first upload, the
 site uses `public/cv.pdf`.
 The Portfolio visits tab shows unique browsers recorded per day, total visits,
-and visit email notification status. A random, HTTP-only browser cookie is used
-to count each browser once per day; IP addresses and personal visitor details
-are not stored. New contact messages and new daily visits send notifications
-to `waleedcoderz@gmail.com` when SMTP is configured.
+and visit email notification status. Visit records can be searched by date,
+paginated, and deleted. A random, HTTP-only browser cookie is used to count
+each browser once per day; IP addresses, visitor email addresses, and personal
+visitor identities are not collected. A notification is sent immediately to
+`waleedcoderz@gmail.com` for a new daily browser visit when SMTP is configured.
+Repeat visits from the same browser on the same day do not send another alert.
+New contact messages also send notifications when SMTP is configured.
 
 MongoDB stores the portfolio document in the `portfolio_content` collection,
 contact submissions in `contact_messages`, and visit counts in

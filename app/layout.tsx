@@ -10,26 +10,36 @@ import { AnimatedBackground } from "@/components/animated-background"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
+const logoUrl =
+  "https://res.cloudinary.com/do3bdamxv/image/upload/v1793268641/Neon_Aqua_WA_Monogram-removebg-preview_cnip5s.png"
+
 export const metadata: Metadata = {
-  title: "Waleed Portfolio",
-  description: "Full-Stack Developer Portfolio",
+  title: "Waleed Ahmad | Portfolio",
+  description:
+    "Waleed Ahmad — Full Stack Developer specializing in React.js, Next.js, Node.js, Express.js, MongoDB, and PostgreSQL.",
   generator: "Waleed Ahmad",
+
   icons: {
     icon: [
       {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
-        media: "(prefers-color-scheme: light)",
+        url: logoUrl,
+        type: "image/png",
+        sizes: "320x320",
       },
       {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
-        type: "image/svg+xml",
+        url: logoUrl,
+        type: "image/png",
+        sizes: "1920x1920",
       },
     ],
-    apple:"https://res.cloudinary.com/do3bdamxv/image/upload/v1784895027/LOGO_WA_yhzafh.png",
+    shortcut: [{ url: logoUrl, type: "image/png" }],
+    apple: [{ url: logoUrl, type: "image/png" }],
+  },
+
+  openGraph: {
+    title: "Waleed Ahmad | Portfolio",
+    description: "Full Stack Developer Portfolio",
+    type: "website",
   },
 }
 
@@ -40,7 +50,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body suppressHydrationWarning className="relative min-h-screen font-sans antialiased">
+      <body
+        suppressHydrationWarning
+        className="relative min-h-screen font-sans antialiased"
+      >
         <AnimatedBackground />
         <AosInit />
         {children}

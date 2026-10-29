@@ -18,7 +18,8 @@ export async function POST(request: NextRequest) {
   const visitorId = existingVisitorId && uuidPattern.test(existingVisitorId)
     ? existingVisitorId
     : randomUUID()
-  const visitDate = new Date().toISOString().slice(0, 10)
+  const createdAt = new Date()
+  const visitDate = createdAt.toISOString().slice(0, 10)
   const database = await getDatabase()
   const visits = database.collection<PortfolioVisit>("portfolio_visits")
 
@@ -29,7 +30,7 @@ export async function POST(request: NextRequest) {
       $setOnInsert: {
         visitor_id: visitorId,
         visit_date: visitDate,
-        created_at: new Date(),
+        created_at: createdAt,
         notification_status: "not_configured",
       },
     },
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
       try {
         await sendAdminNotification({
           subject: "New portfolio visit",
-          text: `Someone visited your portfolio on ${visitDate}.`,
+          text: `Someone visited your portfolio on ${visitDate} at ${createdAt.toISOString()} (UTC).`,
         })
         notificationStatus = "sent"
         notificationSent = true

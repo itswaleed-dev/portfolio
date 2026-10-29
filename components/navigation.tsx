@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { navigateToSection, scrollToCurrentPath } from "@/lib/scroll-to-section"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -12,17 +13,25 @@ export function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
+    const handlePopState = () => scrollToCurrentPath()
+
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("popstate", handlePopState)
+    scrollToCurrentPath()
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("popstate", handlePopState)
+    }
   }, [])
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/skills", label: "Skills" },
+    { href: "/projects", label: "Projects" },
+    { href: "/experience", label: "Experience" },
+    { href: "/contact", label: "Contact" },
   ]
 
   return (
@@ -33,7 +42,7 @@ export function Navigation() {
         isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" className="text-lg font-bold text-primary sm:text-xl">
+          <a href="/" onClick={navigateToSection} className="text-lg font-bold text-primary sm:text-xl">
             {"Waleed.dev"}
           </a>
 
@@ -44,6 +53,7 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
+                onClick={navigateToSection}
               >
                 {item.label}
               </a>
@@ -71,7 +81,10 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 className="nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(event) => {
+                  navigateToSection(event)
+                  setIsMobileMenuOpen(false)
+                }}
               >
                 {item.label}
               </a>

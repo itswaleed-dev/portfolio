@@ -5,6 +5,7 @@ import { ArrowDown, Eye, FileDown, Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
 import type { PortfolioContent } from "@/lib/portfolio-content"
 import { TypewriterText } from "@/components/typewriter-text"
+import { navigateToSection } from "@/lib/scroll-to-section"
 
 export function Hero({ content }: { content: PortfolioContent["hero"] }) {
   return (
@@ -27,10 +28,10 @@ export function Hero({ content }: { content: PortfolioContent["hero"] }) {
 
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-start">
               <Button size="lg" asChild className="w-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/20 min-[420px]:w-auto">
-                <a href="#contact">Get In Touch</a>
+                <a href="/contact" onClick={navigateToSection}>Get In Touch</a>
               </Button>
               <Button size="lg" variant="outline" asChild className="w-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10 min-[420px]:w-auto">
-                <a href="#projects">View Projects</a>
+                <a href="/projects" onClick={navigateToSection}>View Projects</a>
               </Button>
               <Button size="lg" variant="outline" asChild className="w-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/10 min-[420px]:w-auto">
                 <a href="/api/cv" target="_blank" rel="noopener noreferrer">
@@ -89,7 +90,7 @@ export function Hero({ content }: { content: PortfolioContent["hero"] }) {
         </div>
       </div>
 
-      <a href="#about" className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <a href="/about" onClick={navigateToSection} className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <ArrowDown className="h-6 w-6 text-muted-foreground" />
       </a>
     </section>

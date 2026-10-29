@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+body{
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -342,6 +346,10 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     #projects [data-aos],
     #skills [data-aos] {
       opacity: 1 !important;
@@ -354,7 +362,6 @@
     #skills .skill-float,
     #skills .skill-chip {
       animation: none !important;
-      scroll-behavior: auto !important;
       transition: none !important;
     }
 

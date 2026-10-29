@@ -8,12 +8,12 @@ export function Experience({ content }: { content: PortfolioContent["experience"
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section id="experience" data-aos="fade-up" className="py-24 sm:py-32 bg-secondary/30">
+    <section id="experience" data-aos="fade-up" className="bg-secondary/30 py-16 sm:py-24 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
+          <div data-aos="fade-up" data-aos-delay="100" className="mb-10 text-center sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">{content.heading}</h2>
-            <p className="text-muted-foreground text-lg">{content.description}</p>
+            <p className="text-base text-muted-foreground sm:text-lg">{content.description}</p>
           </div>
 
           <div className="relative">
@@ -26,7 +26,7 @@ export function Experience({ content }: { content: PortfolioContent["experience"
                   key={index}
                   data-aos="fade-up"
                   data-aos-delay={`${index * 100}`}
-                  className="relative pl-14 group"
+                  className="group relative pl-12 sm:pl-14"
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
@@ -52,7 +52,7 @@ export function Experience({ content }: { content: PortfolioContent["experience"
 
                   {/* Experience card */}
                   <div
-                    className={`bg-card border rounded-xl p-6 md:p-8 transition-all duration-300 ${
+                    className={`rounded-xl border bg-card p-4 transition-all duration-300 sm:p-6 md:p-8 ${
                       hoveredIndex === index
                         ? "border-primary shadow-[0_0_30px_rgba(6,182,212,0.25)] translate-x-2"
                         : "border-border shadow-md"
@@ -61,8 +61,8 @@ export function Experience({ content }: { content: PortfolioContent["experience"
                     <div className="space-y-4">
                       {/* Title and meta info */}
                       <div>
-                        <h3 className="text-xl md:text-2xl font-bold mb-3 text-balance">{exp.title}</h3>
-                        <div className="flex flex-wrap gap-4 text-sm">
+                        <h3 className="mb-3 text-lg font-bold text-balance sm:text-xl md:text-2xl">{exp.title}</h3>
+                        <div className="flex flex-wrap gap-3 text-xs sm:gap-4 sm:text-sm">
                           <div className="flex items-center gap-2 text-primary">
                             <Briefcase className="h-4 w-4" />
                             <span className="font-semibold">{exp.company}</span>

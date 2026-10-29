@@ -8,7 +8,7 @@ export function Footer({
 }) {
   return (
     <footer data-aos="fade-up" className="bg-background/50 backdrop-blur-sm border-t border-border py-8">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-4">
             <a
@@ -40,7 +40,7 @@ export function Footer({
             </a>
           </div>
 
-          <p className="text-muted-foreground text-center">
+          <p className="px-2 text-center text-sm text-muted-foreground sm:text-base">
             {content.tagline}
           </p>
           <p className="text-sm text-muted-foreground">

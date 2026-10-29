@@ -33,7 +33,7 @@ export function Navigation() {
         isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border" : "bg-transparent"}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#home" className="text-xl font-bold text-primary">
+          <a href="#home" className="text-lg font-bold text-primary sm:text-xl">
             {"Waleed.dev"}
           </a>
 
@@ -65,7 +65,7 @@ export function Navigation() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-card border-b border-border">
-          <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+          <div className="container mx-auto flex flex-col gap-3 px-4 py-4 sm:gap-4">
             {navItems.map((item) => (
               <a
                 key={item.href}

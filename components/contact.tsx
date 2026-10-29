@@ -89,21 +89,21 @@ export function Contact({ content }: { content: PortfolioContent["contact"] }) {
   }
 
   return (
-    <section id="contact" data-aos="fade-up" className="py-24 sm:py-32">
+    <section id="contact" data-aos="fade-up" className="py-16 sm:py-24 lg:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
+          <div data-aos="fade-up" data-aos-delay="100" className="mb-10 text-center sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">{content.heading}</h2>
-            <p className="text-muted-foreground text-lg">{content.description}</p>
+            <p className="text-base text-muted-foreground sm:text-lg">{content.description}</p>
           </div>
 
-          <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
             <Card data-aos="fade-up" data-aos-delay="100">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 text-primary"><Mail className="h-6 w-6" /></div>
-                <div>
+              <CardContent className="flex items-start gap-3 p-4 sm:gap-4 sm:p-6">
+                <div className="rounded-lg bg-primary/10 p-2 text-primary sm:p-3"><Mail className="h-5 w-5 sm:h-6 sm:w-6" /></div>
+                <div className="min-w-0">
                   <h3 className="font-semibold mb-1">Email</h3>
-                  <a href={`mailto:${content.email}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  <a href={`mailto:${content.email}`} className="break-all text-sm text-muted-foreground transition-colors hover:text-primary">
                     {content.email}
                   </a>
                 </div>
@@ -111,9 +111,9 @@ export function Contact({ content }: { content: PortfolioContent["contact"] }) {
             </Card>
 
             <Card data-aos="fade-up" data-aos-delay="150">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 text-primary"><Phone className="h-6 w-6" /></div>
-                <div>
+              <CardContent className="flex items-start gap-3 p-4 sm:gap-4 sm:p-6">
+                <div className="rounded-lg bg-primary/10 p-2 text-primary sm:p-3"><Phone className="h-5 w-5 sm:h-6 sm:w-6" /></div>
+                <div className="min-w-0">
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <a href={`tel:${content.phoneLink}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {content.phone}
@@ -123,8 +123,8 @@ export function Contact({ content }: { content: PortfolioContent["contact"] }) {
             </Card>
 
             <Card data-aos="fade-up" data-aos-delay="200">
-              <CardContent className="p-6 flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-primary/10 text-primary"><MapPin className="h-6 w-6" /></div>
+              <CardContent className="flex items-start gap-3 p-4 sm:gap-4 sm:p-6">
+                <div className="rounded-lg bg-primary/10 p-2 text-primary sm:p-3"><MapPin className="h-5 w-5 sm:h-6 sm:w-6" /></div>
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
                   <p className="text-sm text-muted-foreground">{content.location}</p>
@@ -134,7 +134,7 @@ export function Contact({ content }: { content: PortfolioContent["contact"] }) {
           </div>
 
           <Card className="mt-8">
-            <CardContent className="p-6 sm:p-8">
+            <CardContent className="p-4 sm:p-6 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <Input name="name" placeholder="Your name" value={formData.name} onChange={handleChange} required maxLength={120} autoComplete="name" />

@@ -1,13 +1,18 @@
 import { Github, Mail,Linkedin } from "lucide-react"
+import type { PortfolioContent } from "@/lib/portfolio-content"
 
-export function Footer() {
+export function Footer({
+  content,
+}: {
+  content: PortfolioContent["footer"] & Pick<PortfolioContent["hero"], "email" | "github" | "linkedin">
+}) {
   return (
     <footer data-aos="fade-up" className="bg-background/50 backdrop-blur-sm border-t border-border py-8">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/itswaleed-dev"
+              href={content.github}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:text-primary transition duration-200 hover:-translate-y-0.5"
@@ -16,7 +21,7 @@ export function Footer() {
               <Github className="h-5 w-5" />
             </a>
             <a
-                href="https://www.linkedin.com/in/waleed-ahmad-192598405/"
+                href={content.linkedin}
 
               target="_blank"
               rel="noopener noreferrer"
@@ -27,7 +32,7 @@ export function Footer() {
 
             </a>
             <a
-              href="mailto:waleedcoderz@gmail.com"
+              href={`mailto:${content.email}`}
               className="p-2 hover:text-primary transition duration-200 hover:-translate-y-0.5"
               aria-label="Email"
             >
@@ -36,13 +41,14 @@ export function Footer() {
           </div>
 
           <p className="text-muted-foreground text-center">
-             Full-Stack Developer | Building Projects & Learning Every Day
+            {content.tagline}
           </p>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Waleed Ahmad. All rights reserved.
+            © {new Date().getFullYear()} {content.copyrightName}. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
   )
 }
+ 

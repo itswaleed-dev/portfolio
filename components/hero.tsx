@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import Image from "next/image"
+import type { PortfolioContent } from "@/lib/portfolio-content"
+import { TypewriterText } from "@/components/typewriter-text"
 
-export function Hero() {
+export function Hero({ content }: { content: PortfolioContent["hero"] }) {
   return (
     <section id="home" data-aos="fade-up" className="relative px-10 min-h-screen flex items-center justify-center overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -14,14 +16,15 @@ export function Hero() {
             
 
             <h1 className="text-5xl mt-20 sm:text-6xl lg:text-7xl font-bold text-balance">
-              <span className="text-primary">Waleed Ahmad</span>
+              <span className="text-primary">{content.name}</span>
               <br />
-              Developer
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl font-semibold text-balance">
+              <TypewriterText />
+              </h1>
             </h1>
 
             <p className="text-lg sm:text-xl text-muted-foreground text-pretty">
-             Full-Stack-Developer with 1+ years of experience building scalable web applications using React.js, Next.js, Node.js, MongoDB, and PostgreSQL. Skilled in developing responsive user interfaces, RESTful APIs, and end-to-end solutions. Experienced with Jira for agile project management and mentoring frontend interns in React.js and modern frontend development.
-
+              {content.description}
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
@@ -35,7 +38,7 @@ export function Hero() {
 
             <div className="flex items-center justify-center lg:justify-start gap-4 pt-4">
               <a
-                href="https://github.com/itswaleed-dev"
+                href={content.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:text-primary transition-colors"
@@ -44,7 +47,7 @@ export function Hero() {
                 <Github className="h-6 w-6" />
               </a>
               <a
-                href="https://www.linkedin.com/in/waleed-ahmad-192598405/"
+                href={content.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:text-primary transition-colors"
@@ -53,7 +56,7 @@ export function Hero() {
               <Linkedin className="h-6 w-6" />
               </a>
               <a
-                href="mailto:waleedcoderz@gmail.com"
+                href={`mailto:${content.email}`}
                 className="p-2 hover:text-primary transition-colors"
                 aria-label="Email"
               >
@@ -68,8 +71,8 @@ export function Hero() {
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl"></div>
               <div className="relative rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl aspect-square">
                 <Image
-                  src="https://res.cloudinary.com/do3bdamxv/image/upload/v1784204196/ChatGPT_Image_Jul_16_2026_05_14_20_PM_wgjuaw.png"
-                  alt="Waleed Ahmad"
+                  src={content.image || "/placeholder-user.jpg"}
+                  alt={content.name}
                   width={400}
                   height={400}
                   className="w-full h-[125%] object-fill"

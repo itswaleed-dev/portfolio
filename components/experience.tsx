@@ -2,36 +2,9 @@
 
 import { useState } from "react"
 import { Briefcase, Calendar } from "lucide-react"
+import type { PortfolioContent } from "@/lib/portfolio-content"
 
-const experiences = [
-  {
-    title: "Full-Stack Developer",
-    company: "DevInsta Company",
-    period: "| 2025 – Present",
-    description:
-      "Developed and maintained a full-stack medical web application using React.js, Next.js, Node.js, Express.js, and MongoDB. Managed both frontend and backend development, built responsive user interfaces, developed secure RESTful APIs, integrated database functionality, and implemented new features while ensuring application performance, scalability, and maintainability.",
-    achievements: [
-      "Developed responsive and user-friendly interfaces using React.js, Next.js, and Tailwind CSS, improving the overall user experience.",
-      "Designed and implemented secure RESTful APIs with Node.js and Express.js for seamless frontend-backend communication.",
-      "Integrated MongoDB for efficient data management and optimized database queries to improve application performance.",
-    ],
-  },
-  {
-    title: "Programming Instructor",
-    company: "Live Coder | Lahore, Pakistan",
-    period: "| 2025 – Present",
-    description:
-      "Mentored aspiring developers in modern web development by delivering practical training in frontend and backend technologies. Conducted hands-on coding sessions, provided code reviews, guided students through real-world projects, and promoted clean coding practices while helping them build scalable web applications using the MERN stack.",
-    achievements: [
-      "Mentored and aspiring students in HTML5, CSS3, JavaScript (ES6+), React.js, Node.js, Express.js, and MongoDB.",
-      "Conducted hands-on coding sessions, code reviews, and one-on-one technical mentoring to strengthen students' problem-solving skills.",
-      "Designed structured learning materials and practical assignments to improve students' understanding of frontend and backend development.",
-    ],
-  },
- 
-]
-
-export function Experience() {
+export function Experience({ content }: { content: PortfolioContent["experience"] }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
@@ -39,8 +12,8 @@ export function Experience() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <div data-aos="fade-up" data-aos-delay="100" className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">Work Experience</h2>
-            <p className="text-muted-foreground text-lg">Professional journey in software development</p>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">{content.heading}</h2>
+            <p className="text-muted-foreground text-lg">{content.description}</p>
           </div>
 
           <div className="relative">
@@ -48,7 +21,7 @@ export function Experience() {
             <div className="absolute left-4 top-0 bottom-0 w-[3px] bg-gradient-to-b from-primary/0 via-primary/50 to-primary/0" />
 
             <div className="space-y-16">
-              {experiences.map((exp, index) => (
+              {content.items.map((exp, index) => (
                 <div
                   key={index}
                   data-aos="fade-up"
